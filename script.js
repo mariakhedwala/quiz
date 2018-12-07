@@ -1,16 +1,11 @@
-// var startTime, endTime;
-
-// function start() {
-//     startTime = new Date();
-// };
-
-// function end() {
-//     endTime = new Date();
-//     var timeDiff = endTime - startTime; //in ms
-//     // strip the ms
-//     timeDiff /= 1000;
-
-//     // get seconds 
-//     var seconds = Math.round(timeDiff);
-//     console.log(seconds + " seconds");
-// }
+var count = 15;
+var interval = setInterval(function(){
+  document.getElementById('count').innerHTML=count;
+  count--;
+  if (count === 0){
+    clearInterval(interval);
+    document.getElementById('count').innerHTML='Done';
+    // or...
+    alert("You're out of time!");
+  }
+}, 1000);

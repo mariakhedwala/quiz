@@ -83,9 +83,9 @@
     $totalTimeTaken = $interval->format("%I:%S");
     echo "You took <strong>".$totalTimeTaken. "</strong> to complete the quiz";
 
-    $name = $_SESSION['username'];
-    $finalResult = "INSERT into result(username,total_q,correct_ans,timeTaken) VALUES ('$name',10,'$correctCount','$totalTimeTaken')";
-    $finalResultFire = mysqli_query($conn,$finalResult);
+    // $name = $_SESSION['username'];
+    // $finalResult = "INSERT into result(username,total_q,correct_ans,timeTaken) VALUES ('$name',10,'$correctCount','$totalTimeTaken')";
+    // $finalResultFire = mysqli_query($conn,$finalResult);
 
   }
 ?>

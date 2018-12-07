@@ -12,7 +12,9 @@ $counter = 0;
     $_SESSION['startTimeObj'] = $date;
     $startTime = $date->format('Y-m-d H:i:s') . "\n";
     $_SESSION['startTime'] = $startTime;
+ 
   }
+
   if(isset($_POST['next'])) {
     $counter = $_SESSION['counter1'] += 1;
   } else {
@@ -68,6 +70,7 @@ $counter = 0;
 <body>
 <?php  if (isset($_SESSION['username']) && ($_SESSION['role']== 'student') && isset($_SESSION['quiz'])) : ?>
   you are here
+  <span id="timer"></span>
   <?php echo $_SESSION['quiz']; ?>
     <p> <a href="index.php?logout='1'" style="color: red;" >logout</a> </p>
     <?php
@@ -93,6 +96,7 @@ $counter = 0;
           <?php } ?>
           <input type="hidden" name="indexOfArray" value= <?php echo $counter; ?> />
           <input type="hidden" name="currentQuestionNumber" value= <?php echo $currentQuestion[$counter]; ?> />
+          <input type="hidden" class="startTimeInput" value= "<?php echo $_SESSION['startTime']; ?>" />
       <?php } 
     }
     ?>
@@ -122,6 +126,94 @@ $counter = 0;
       <?php
     ?>
   <?php endif ?>
-  
+    <!-- <script text="javascript">
+    window.onload = function() {
+      var startT = document.querySelector(".startTimeInput").value;
+      
+      var now = <?php //echo time() ?> * 1000;
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+      // var months = [1,2,3,4,5,6,7,8,9,10];
+      // var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        // Get todays date and time
+        // 1. JavaScript
+        now = now+1000;
+        var now1 = new Date(now);
+
+        var yearr = now1.getFullYear();
+        var monthh = now1.getMonth()+1;
+        var datee = ("0" + now1.getDate()).slice(-2);
+        var hourr = now1.getHours();
+        var minn = now1.getMinutes();
+        var secs = now1.getSeconds(); 
+        // console.log(yearr,monthh,datee,hourr,minn,secs);
+        var myJSTime = yearr +"-"+ monthh +"-"+ datee +" "+ hourr+":"+ minn +":"+ secs;
+        // 2. PHP
+      console.log(Date.parse(startT+"-0500")/1000);
+      var startNewT = Date.parse(startT+"-0500")/1000;
+        console.log(Date.parse(myJSTime+"-0500")/1000);
+        var JST = Date.parse(myJSTime+"-0500")/1000;
+        // console.log(now1.toString());
+        $interval = $date1 -> diff($_SESSION['startTimeObj']);
+        <?php 
+        //$differ = 1544232952 -> diff(1544232952);
+        ?>
+
+        // Find the distance between now an the count down date
+        var distance =  myJSTime - startT;
+        console.log(distance);
+
+        // Time calculations for days, hours, minutes and seconds
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        console.log(hours,minutes,seconds);
+        // Output the result in an element with id="demo"
+        document.getElementById("timer").innerHTML = hours + "h " +
+            minutes + "m " + seconds + "s ";
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("timer").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+    };
+      
+    </script> -->
+    <script text="javascript">
+      var startT = document.querySelector(".startTimeInput").value;
+    var countDownDate = new Date(startT).getTime();
+console.log(countDownDate);
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer").innerHTML = "EXPIRED";
+  }
+}, 1000);
+
+    </script>
+
 </body>
 </html>
