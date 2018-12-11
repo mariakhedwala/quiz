@@ -38,16 +38,19 @@
     <?php  if (isset($_SESSION['username'])) : ?>
       <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
       <?php if($_SESSION['role'] == 'admin') { ?>
-        <a href="show-results.php?show-results='1'" title="show results" class="btn">Show results</a>
-      <?php  echo $_SESSION['role'];
-        } else if($_SESSION['role']=='student'){ ?>
-        <a href="start-quiz.php?start-quiz='1'" title="start quiz" onclick="start()" class="btn">start quiz</a>
-        <!-- <input type="submit" name="start-quiz" value="Start Quiz" class="btn"> -->
-      <?php  
-      // echo $_SESSION['role'] . " No access to you";
-        }
-      ?>
-    	<p> <a href="index.php?logout='1'" style="color: red;" >logout</a> </p>
+        <a href="show-results.php?show-results='1'" title="show results" class="btn" style="display:block;text-align:center;">Show results</a>
+      <?php } else if($_SESSION['role'] == 'student'){ ?>
+        <a href="start-quiz.php?start-quiz='1'" title="start quiz" class="btn">start quiz</a>
+        <ul>
+          <li>You will get total time of <strong>20 minutes</strong></li>
+          <li>Do not refresh else your question will be skipped</li>
+          <li>If your quiz is left incomplete your result will not be evaluated</li>
+          <li>Do not logout in between</li>
+          <li>If you have already given the test, giving it again will not be counted</li>
+        </ul>
+        <p>GOOD LUCK!</p>
+      <?php  }  ?>
+    	<p class="logout"> <a href="index.php?logout='1'" style="width:100%; display:inline-block; text-align:left;">logout</a> </p>
     <?php endif ?>
 </div>
 </body>

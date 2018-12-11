@@ -29,7 +29,6 @@
         </p>
         <p class="logout"> <a href="index.php?logout='1'">Log-out</a> </p>
       </div>
-      <?php if(isset($_POST['sortByScore'])) { ?>
         <table class="results">
         <thead>
           <tr>
@@ -41,7 +40,7 @@
         <tbody>
           <?php 
           global $conn;
-          $query = "SELECT * FROM result ORDER BY correct_ans DESC";
+          $query = "SELECT * FROM result ORDER BY correct_ans DESC, timeTaken";
           $results = mysqli_query($conn,$query);
             while($row = mysqli_fetch_assoc($results)) { ?>
               <tr>
@@ -52,34 +51,7 @@
             <?php } ?> 
           </tbody>
         </table>
-      <?php } ?>
-      <?php if(isset($_POST['sortByTime'])) { ?>
-        <table class="results">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>score</th>
-            <th>time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php 
-          global $conn;
-          $query = "SELECT * FROM result ORDER BY timeTaken";
-          $results = mysqli_query($conn,$query);
-            while($row = mysqli_fetch_assoc($results)) { ?>
-              <tr>
-                <td><?php echo $row['username']; ?></td>
-                <td><?php echo $row['correct_ans']; ?></td>
-                <td><?php echo $row['timeTaken']; ?></td>
-              </tr>
-            <?php } ?> 
-          </tbody>
-        </table>
-      <?php } ?>
-      <form method="post" class="show-result-form">
-        <input type="submit" name="sortByScore" value="Sort By High Score">
-        <input type="submit" name="sortByTime" value="Sort By Least Time">
+      <p style="text-align:center;margin:10px 0;color:green;">SORTED BY HIGHSCORE AND LEAST TIME!!!</p>
       </form>
     <?php endif ?>
   </div>
